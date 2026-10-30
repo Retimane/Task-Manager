@@ -1,0 +1,327 @@
+/* ---------- Paint buckets ---------- */
+:root {
+  --bg: #FFD93D;
+  --card: #ffffff;
+  --ink: #141414;
+  --pink: #FF6B9A;
+  --green: #3DDC97;
+  --blue: #4D96FF;
+}
+
+/* ---------- Reset and page ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Card and title ---------- */
+.app {
+  max-width: 520px;
+  margin: 0 auto;
+  background: var(--card);
+  border: 3px solid var(--ink);
+  border-radius: 20px;
+  box-shadow: 8px 8px 0 var(--ink);
+  padding: 32px;
+}
+
+h1 {
+  font-size: 2.4rem;
+  margin-bottom: 24px;
+  width: fit-content;
+  padding: 0 10px;
+  border-radius: 8px;
+  background: var(--green);
+}
+
+/* ---------- Form ---------- */
+#task-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#task-input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 16px;
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 1rem;
+}
+
+#task-input:focus {
+  outline: none;
+  box-shadow: 4px 4px 0 var(--blue);
+}
+
+#task-form button {
+  flex-shrink: 0;
+  padding: 12px 22px;
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  background: var(--blue);
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--ink);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+#task-form button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+#task-form button:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--ink);
+}
+
+.due-row {
+  flex-basis: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  font-weight: bold;
+}
+
+#due-input {
+  flex: 1 1 200px;
+  min-width: 0;
+  max-width: 100%;
+  padding: 8px 12px;
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+#due-input:focus {
+  outline: none;
+  box-shadow: 4px 4px 0 var(--blue);
+}
+
+/* ---------- Filters ---------- */
+.filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.filter {
+  padding: 8px 16px;
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.filter:hover {
+  background: var(--green);
+}
+
+.filter.active {
+  background: var(--ink);
+  color: #fff;
+}
+
+/* ---------- Task list ---------- */
+#task-list {
+  list-style: none;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 2px dashed var(--ink);
+}
+
+.task input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  accent-color: var(--ink);
+  cursor: pointer;
+}
+
+.task-body {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.task-body span {
+  font-size: 1.05rem;
+}
+
+.task.done .task-body span {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.task button {
+  padding: 6px 12px;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  background: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.task button:hover {
+  background: var(--pink);
+}
+
+.edit-input {
+  width: 100%;
+  min-width: 0;
+  padding: 6px 10px;
+  border: 3px solid var(--ink);
+  border-radius: 8px;
+  font-size: 1.05rem;
+  font-family: inherit;
+}
+
+.edit-input:focus {
+  outline: none;
+  box-shadow: 3px 3px 0 var(--blue);
+}
+
+/* ---------- Due dates ---------- */
+.due {
+  display: block;
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-top: 2px;
+}
+
+.due.overdue {
+  color: #c2255c;
+  font-weight: bold;
+  opacity: 1;
+}
+
+.task.done .due {
+  opacity: 0.4;
+}
+
+/* ---------- Empty message ---------- */
+.empty {
+  padding: 28px 0;
+  text-align: center;
+  font-weight: bold;
+  opacity: 0.6;
+  border-bottom: 2px dashed var(--ink);
+}
+
+/* ---------- Counter and Clear done ---------- */
+.footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+#counter {
+  font-weight: bold;
+}
+
+#clear-done {
+  padding: 8px 16px;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  background: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+#clear-done:hover:not(:disabled) {
+  background: var(--pink);
+}
+
+#clear-done:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+/* ---------- Keyboard focus ---------- */
+button:focus-visible,
+.task input[type="checkbox"]:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+
+/* ---------- Phones (keep this block LAST in the file) ---------- */
+@media (max-width: 480px) {
+  body {
+    padding: 20px 12px;
+  }
+
+  .app {
+    padding: 20px;
+    box-shadow: 5px 5px 0 var(--ink);
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  #task-form {
+    gap: 8px;
+  }
+
+  #task-form button {
+    padding: 12px 16px;
+  }
+
+  .filter {
+    padding: 8px 14px;
+  }
+
+  .task {
+    flex-wrap: wrap;
+  }
+
+  .task-body {
+    flex-basis: calc(100% - 40px);
+  }
+
+  .task button {
+    padding: 8px 14px;
+  }
+}
